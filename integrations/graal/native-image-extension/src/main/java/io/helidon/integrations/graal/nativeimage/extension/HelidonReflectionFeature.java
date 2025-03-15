@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2024 Oracle and/or its affiliates.
+ * Copyright (c) 2019, 2024, 2025 Oracle and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -191,7 +191,7 @@ public class HelidonReflectionFeature implements Feature {
         sd.allMetadata()
                 .stream()
                 .map(DescriptorHandler::descriptor)
-                .filter(it -> it instanceof ServiceLoader__ServiceDescriptor)
+                .filter(ServiceLoader__ServiceDescriptor.class::isInstance)
                 .map(it -> (ServiceLoader__ServiceDescriptor) it)
                 .map(ServiceLoader__ServiceDescriptor::serviceType)
                 .forEach(it -> processServiceLoaderDescriptor(context, it));

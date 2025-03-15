@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2023 Oracle and/or its affiliates.
+ * Copyright (c) 2019, 2023, 2025 Oracle and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -202,9 +202,7 @@ class WeldFeature {
                 } catch (JsonParsingException e) {
                     throw new NativeImageException("Failed to read JSON config: " + url, e);
                 }
-                proxies.forEach(jsonValue -> {
-                    weldProxies.add(new WeldProxyConfig((JsonObject) jsonValue));
-                });
+                proxies.forEach(jsonValue -> weldProxies.add(new WeldProxyConfig((JsonObject) jsonValue)));
             }
             return weldProxies;
         } catch (IOException e) {

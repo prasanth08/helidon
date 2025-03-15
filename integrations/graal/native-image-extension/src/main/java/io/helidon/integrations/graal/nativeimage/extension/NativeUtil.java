@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 2024 Oracle and/or its affiliates.
+ * Copyright (c) 2021, 2024, 2025 Oracle and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -172,8 +172,7 @@ public final class NativeUtil {
             return getSimpleType(classResolver, typeDescriptor);
         }
 
-        if (typeSignature instanceof ClassRefTypeSignature) {
-            ClassRefTypeSignature refType = (ClassRefTypeSignature) typeSignature;
+        if (typeSignature instanceof ClassRefTypeSignature refType) {
             List<TypeArgument> typeArguments = refType.getTypeArguments();
             if (typeArguments.size() == 1) {
                 TypeArgument typeArgument = typeArguments.get(0);
@@ -187,13 +186,11 @@ public final class NativeUtil {
     Class<?> getSimpleType(Function<String, Class<?>> classResolver, TypeSignature typeSignature) {
         // this is the type used
         // may be: array, primitive type
-        if (typeSignature instanceof BaseTypeSignature) {
+        if (typeSignature instanceof BaseTypeSignature bts) {
             // primitive types
-            BaseTypeSignature bts = (BaseTypeSignature) typeSignature;
             return box(bts.getType());
         }
-        if (typeSignature instanceof ClassRefTypeSignature) {
-            ClassRefTypeSignature crts = (ClassRefTypeSignature) typeSignature;
+        if (typeSignature instanceof ClassRefTypeSignature crts) {
             return classResolver.apply(crts.getFullyQualifiedClassName());
         }
 
